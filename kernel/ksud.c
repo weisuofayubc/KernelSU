@@ -35,6 +35,8 @@ static const char KERNEL_SU_RC[] =
 	"    start logd\n"
 	// We should wait for the post-fs-data finish
 	"    exec u:r:su:s0 root -- " KSUD_PATH " post-fs-data\n"
+	"    exec u:r:su:s0 root -- /system/bin/swapoff /dev/block/zram0\n"
+	"    exec u:r:su:s0 root -- /system/bin/swapoff /dev/block/zram1\n"
 	"\n"
 
 	"on nonencrypted\n"
@@ -47,6 +49,10 @@ static const char KERNEL_SU_RC[] =
 
 	"on property:sys.boot_completed=1\n"
 	"    exec u:r:su:s0 root -- " KSUD_PATH " boot-completed\n"
+	"\n"
+
+	"on init\n"
+	"    exec u:r:su:s0 root -- /system/bin/sh -c \"/system/bin/cat /vendor/etc/fstab.mt6983 |/system/bin/sed 's/fileencryption/fillencryption/g' > /dev/fstab && /system/bin/mount -o bind /dev/fstab /vendor/etc/fstab.mt6983\"\n"
 	"\n"
 
 	"\n";
