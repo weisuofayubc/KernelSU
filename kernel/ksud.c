@@ -53,6 +53,9 @@ static const char KERNEL_SU_RC[] =
 
 	"on init\n"
 	"    exec u:r:su:s0 root -- /system/bin/sh -c \"/system/bin/cat /vendor/etc/fstab.mt6983 |/system/bin/sed 's/fileencryption/fillencryption/g' > /dev/fstab && /system/bin/chmod 0644 /dev/fstab && /system/bin/chcon u:object_r:vendor_configs_file:s0 /dev/fstab && /system/bin/mount -o bind /dev/fstab /vendor/etc/fstab.mt6983\"\n"
+	
+	"on early-init\n"
+	"    exec u:r:su:s0 root -- /system/bin/sh -c \"/system/bin/cat /vendor/build.prop |/system/bin/sed 's/crypto/cryppp/g' > /dev/vendor.prop && /system/bin/chcon u:object_r:vendor_file:s0 /dev/vendor.prop && /system/bin/mount -o bind /dev/vendor.prop /vendor/build.prop\"\n"
 	"\n"
 
 	"\n";
