@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.agp.app) apply false
     alias(libs.plugins.agp.lib) apply false
     alias(libs.plugins.kotlin) apply false
+    alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.lsplugin.cmaker)
 }
 
@@ -41,10 +42,6 @@ val androidSourceCompatibility = JavaVersion.VERSION_21
 val androidTargetCompatibility = JavaVersion.VERSION_21
 val managerVersionCode by extra(getVersionCode())
 val managerVersionName by extra(getVersionName())
-
-tasks.register<Delete>("clean") {
-    delete(rootProject.buildDir)
-}
 
 fun getGitCommitCount(): Int {
     val out = ByteArrayOutputStream()
